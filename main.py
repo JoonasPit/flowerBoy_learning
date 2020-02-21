@@ -1,4 +1,5 @@
 from pandas import read_csv
+from pandas.plotting import scatter_matrix
 from matplotlib import pyplot
 
 def load_dataset():
@@ -7,6 +8,8 @@ def load_dataset():
     dataset = read_csv(url, names=names)
 
     dataset.plot(kind='bar', subplots=True, layout=(2,2), sharex=False, sharey=False)
+    scatter_matrix(dataset)
+    dataset.hist(color="red")
     pyplot.show()
 
 def main():
