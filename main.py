@@ -11,6 +11,7 @@ from sklearn.naive_bayes import GaussianNB as GNB
 from sklearn.svm import SVC
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_val_score as c_v_l
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
 
 # ALlter
@@ -32,31 +33,42 @@ def load_dataset(dataset):
     Y = learn_array[:, 4]
     X_train, X_validation, Y_train, Y_validation = train_test_split(X, Y, test_size=0.20, random_state=1)
 
-# add to array of models name, model
-    models = []
-    models.append(('LR', LogReg(solver='liblinear', multi_class='ovr')))
-    models.append(('LDA', LinDiA()))
-    models.append(('CART', DecTree()))
-    models.append(('NB', GNB()))
-    models.append(('SVM', SVC(gamma='auto')))
+    # predictions made out of validated dataset
 
-    results = []
-    names = []
+
+    # add to array of models name, model
+ #   models = []
+ #   models.append(('LR', LogReg(solver='liblinear', multi_class='ovr')))
+ #   models.append(('LDA', LinDiA()))
+ #   models.append(('CART', DecTree()))
+ #   models.append(('NB', GNB()))
+ #   models.append(('SVM', SVC(gamma='auto')))
+
+ #   results = []
+ #   names = []
     # choose a validation method, run through c_v_l function with model being selected from models array
    # Get put in to results array.
    # boxplot out results from results array
    # Chose best algorithm based off result accuracy
-    for name, model in models:
-        fold = StratifiedKFold(n_splits=10, random_state=1)
-        validated_results = c_v_l(model, X_train, Y_train, cv=fold, scoring='accuracy')
-        results.append(validated_results)
-        names.append(name)
-        print('%s: %f (%f)' % (name, validated_results.mean(), validated_results.std()))
+   # for name, model in models:
+  #      fold = StratifiedKFold(n_splits=10, random_state=1)
+   #     validated_results = c_v_l(model, X_train, Y_train, cv=fold, scoring='accuracy')
+  #      results.append(validated_results)
+  #      names.append(name)
+  #      print('%s: %f (%f)' % (name, validated_results.mean(), validated_results.std()))
 
 
-    pyplot.boxplot(results, labels=names)
-    pyplot.title('Algorithm Comparison')
-    pyplot.show()
+#    pyplot.boxplot(results, labels=names)
+  #  pyplot.title('Algorithm Comparison')
+  #  pyplot.show()
+    model = SVC(gamma='auto')
+    model.fit(X_train, Y_train)
+    predictions = model.predict(X_validation)
+    print(accuracy_score(Y_validation, predictions))
+    print(confusion_matrix(Y_validation, predictions))
+    print(classification_report(Y_validation, predictions))
+
+
 def main():
     load_dataset(dataset)
 
