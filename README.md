@@ -3,9 +3,11 @@
  Aided with understanding algorithm selection, how to read confusion matrixes and prediction accuracy results
  Also worked with some basic branching etc git stuff to familiarize myself better with git
  
- ```
+ ```javascript
+ `
  MERGE INTO(foo)
  SELECT * FROM bar.
  jne
  jne
+ `
  ```
