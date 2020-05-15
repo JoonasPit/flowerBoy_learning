@@ -4,8 +4,7 @@
  Also worked with some basic branching etc git stuff to familiarize myself better with git
  
  ```javascript
- `
- MERGE INTO(foo)
+ var foo_var = `MERGE INTO(foo)
  SELECT * FROM bar.
  jne
  jne
